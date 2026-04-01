@@ -161,10 +161,115 @@ Compiler le projet avant de lancer les tests (neotest utilise les classes compil
 mvn compile test-compile
 ```
 
-Raccourcis dans Neovim :
+---
+
+## Raccourcis clavier
+
+### Leader key
+`<Space>` (Espace) est configuré comme touche leader.
+
+### Navigation & Fichiers
 
 | Raccourci | Action |
 |-----------|--------|
-| `tt` | test sous le curseur |
-| `tf` | tous les tests du fichier |
-| `to` | ouvrir le panneau de résultats |
+| `-` | Ouvrir Oil (file explorer) |
+| `<leader>sf` | Search Files (Telescope) |
+| `<leader>sg` | Search Grep (Telescope) |
+| `<leader>sr` | Search Recent files (Telescope) |
+| `<leader>st` | Search TODOs (Telescope) |
+
+### LSP (Language Server Protocol)
+
+| Raccourci | Action |
+|-----------|--------|
+| `gd` | Go to Definition |
+| `gD` | Go to Declaration |
+| `gr` | Find References |
+| `gI` | Go to Implementation |
+| `gt` | Go to Type Definition |
+| `K` | Hover Documentation |
+| `<C-k>` | Signature Help (mode insertion) |
+| `<leader>rn` | Rename symbol |
+| `<leader>ca` | Code Action |
+| `<leader>ds` | Document Symbols |
+| `<leader>ws` | Workspace Symbols |
+| `<leader>f` | Format buffer |
+
+### Diagnostics
+
+| Raccourci | Action |
+|-----------|--------|
+| `<leader>e` | Show diagnostic (flottant) |
+| `[d` | Previous diagnostic |
+| `]d` | Next diagnostic |
+
+### Tests (Neotest)
+
+| Raccourci | Action |
+|-----------|--------|
+| `<leader>tt` | Test sous le curseur |
+| `<leader>tf` | Tous les tests du fichier |
+| `<leader>to` | Ouvrir le panneau de résultats |
+| `<leader>mo` | Message output (test détaillé) |
+
+### Git
+
+| Raccourci | Action |
+|-----------|--------|
+| `<leader>lg` | Ouvrir LazyGit |
+| `]h` | Next hunk (changement git) |
+| `[h` | Previous hunk (changement git) |
+| `<leader>hs` | Stage hunk |
+| `<leader>hr` | Reset hunk |
+| `<leader>hp` | Preview hunk |
+| `<leader>hb` | Blame line |
+
+### Autocomplétion (nvim-cmp)
+
+| Raccourci | Action |
+|-----------|--------|
+| `<Tab>` | Sélectionner item suivant / expand snippet |
+| `<S-Tab>` | Sélectionner item précédent |
+| `<CR>` | Confirmer la sélection |
+| `<C-Space>` | Ouvrir le menu manuellement |
+| `<C-e>` | Fermer le menu |
+
+### Text Objects & Surround (mini.nvim)
+
+| Raccourci | Action |
+|-----------|--------|
+| `vaf` / `vif` | Visual autour/dans function |
+| `vac` / `vic` | Visual autour/dans class |
+| `sa"` | Add surround (guillemets) |
+| `sd"` | Delete surround |
+| `sr"'` | Replace surround (" par ') |
+
+---
+
+## Plugins inclus
+
+- **Mason** — Gestionnaire de paquets LSP/formatters/linters
+- **nvim-cmp** — Autocomplétion avec sources LSP, snippets, buffer
+- **Telescope** — Fuzzy finder avec fzf-native
+- **Oil** — File explorer éditable
+- **Treesitter** — Syntax highlighting et parsing
+- **Conform** — Formatting avancé
+- **Gitsigns** — Indicateurs git dans la gouttière
+- **Which-key** — Affichage des keymaps disponibles
+- **mini.nvim** — Text objects, surround, autopairs
+- **todo-comments** — Highlight TODO/FIXME/NOTE
+- **neotest + neotest-java** — Framework de testing pour Java
+- **LazyGit** — Interface git TUI
+- **catppuccin** — Thème de couleurs
+
+---
+
+## Structure du projet
+
+```
+~/.config/nvim/
+├── init.lua          -- Configuration principale
+└── README.md         -- Ce fichier
+```
+
+La configuration utilise l'API native Neovim 0.12+ (`vim.lsp.config`, `vim.pack`) sans dépendance à nvim-lspconfig pour la configuration LSP.
