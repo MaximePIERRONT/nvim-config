@@ -1,5 +1,6 @@
 vim.o.number = true
 vim.o.relativenumber = true
+vim.opt.exrc = true
 
 vim.pack.add {
 	"https://github.com/stevearc/oil.nvim",
@@ -51,3 +52,32 @@ vim.keymap.set('n', 'sf', builtin.find_files)
 vim.keymap.set('n', 'sg', builtin.live_grep)
 vim.keymap.set('n', 'sr', builtin.oldfiles)
 vim.keymap.set('n', 'lg', '<cmd>LazyGit<cr>')
+
+
+
+
+
+
+
+vim.pack.add({
+	{ src = 'https://github.com/mfussenegger/nvim-jdtls' },
+	{ src = 'https://github.com/nvim-neotest/nvim-nio' },
+	{ src = 'https://github.com/nvim-neotest/neotest' },
+	{ src = 'https://github.com/rcasia/neotest-java' },
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+})
+
+require('neotest').setup({
+	log_level = vim.log.levels.DEBUG,
+	adapters = {
+		require('neotest-java')({
+			incremental_build = true,
+			force_runner = 'maven',
+			root_markers = { 'pom.xml' },
+		}),
+	},
+})
+
+vim.keymap.set('n', 'tt', function() require('neotest').run.run() end)                   -- test sous le curseur
+vim.keymap.set('n', 'tf', function() require('neotest').run.run(vim.fn.expand('%')) end) -- tout le fichier
+vim.keymap.set('n', 'to', function() require('neotest').output_panel.toggle() end)
